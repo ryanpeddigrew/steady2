@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Steady Improvements | Stamp Palette Edition</title>
+<meta name="description" content="Steady Improvements — interior finishes, composite balcony flooring, and commercial renovations in charcoal, stamp crimson, and warm cream.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2E3133">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F6F3EA;--cream2:#EAE4D3;--charcoal:#26292C;--ink:#141414;
+  --crimson:#8F3B34;--crimson2:#A94840;--sand:#C7B99E;--muted:#4A4742;
+  --head:'Syne',system-ui,sans-serif;--lab:'Oswald','Arial Narrow',sans-serif;--sans:'Work Sans',system-ui,sans-serif
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--cream);color:var(--ink);font:400 17px/1.55 var(--sans);overflow-x:hidden}
+img{display:block;max-width:100%}
+section{scroll-margin-top:88px}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+.wrap{width:min(1240px,100% - 40px);margin:0 auto}
+
+.eyebrow{font:600 12.5px/1 var(--lab);letter-spacing:.22em;text-transform:uppercase;color:var(--crimson);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:26px;height:6px;background:var(--crimson);flex:none}
+.on-charcoal .eyebrow{color:var(--sand)}
+.on-charcoal .eyebrow::before{background:var(--sand)}
+h1,h2,h3{font-family:var(--head);font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:1}
+h2{font-size:clamp(28px,4vw,54px)}
+.lead{font-size:clamp(16px,1.45vw,19px);max-width:54ch;color:var(--muted)}
+.on-charcoal{background:var(--charcoal);color:var(--cream)}
+.on-charcoal .lead{color:#e2dcd0}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 22px;font:700 13px/1 var(--lab);letter-spacing:.15em;text-transform:uppercase;border:0;border-radius:4px;cursor:pointer;transition:background .18s ease,color .18s ease}
+.btn-crimson{background:var(--crimson);color:#fff}.btn-crimson:hover{background:var(--crimson2)}
+.btn-cream{background:var(--cream);color:var(--ink)}.btn-cream:hover{background:var(--sand)}
+.btn-outline{background:transparent;border:2px solid currentColor}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* Flat Charcoal Header + Unaltered Stamp + Block-Capital Hammer-T Wordmark */
+header.top{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--charcoal);color:var(--cream);border-bottom:3px solid var(--crimson)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:88px;gap:24px}
+.brand-lockup{display:inline-flex;align-items:center;gap:20px;line-height:1;flex:none}
+.stamp-ring{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;overflow:hidden;background:#F7F5EE;border:2px solid var(--cream);flex:none}
+.stamp-ring img{width:100%;height:100%;object-fit:contain;display:block}
+.stamp-hd{width:62px;height:62px}
+.stamp-ft{width:104px;height:104px}
+
+.wordmark{display:flex;flex-direction:column;gap:3px;color:var(--cream)}
+.steady-row{display:inline-flex;align-items:baseline;font:700 38px/.86 var(--lab);letter-spacing:.04em;text-transform:uppercase}
+.hammer-t{height:.9em;width:auto;display:inline-block;margin:0 .02em -.05em -.02em;flex:none}
+.imp-row{font:600 11.5px/1 var(--lab);letter-spacing:.34em;text-transform:uppercase;color:var(--sand);padding-left:2px}
+
+.nav{display:flex;gap:28px;align-items:center}
+.nav a.l{font:700 13px/1 var(--lab);letter-spacing:.16em;text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;border-bottom:2px solid transparent}
+.nav a.l:hover{border-color:var(--crimson)}
+.nav .btn{min-height:42px;padding:0 18px;border-radius:2px}
+
+.mbtn{display:none;background:var(--crimson);color:#fff;border:0;border-radius:2px;width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer}
+.mbtn span{display:flex;flex-direction:column;gap:6px;width:22px}
+.mbtn i{display:block;height:2.5px;width:22px;background:#fff}
+.mbtn i:last-child{width:15px;margin-left:auto}
+
+.mnav{position:fixed;inset:0;z-index:90;background:var(--charcoal);display:flex;flex-direction:column;justify-content:center;gap:10px;padding:88px 28px 40px}
+.mnav[hidden]{display:none}
+.mnav a{font:700 clamp(32px,9vw,52px)/1.1 var(--lab);text-transform:uppercase;color:var(--cream);min-height:48px}
+.mx{position:absolute;right:20px;top:20px;background:var(--crimson);color:#fff;border:0;padding:0 16px;min-height:42px;font:700 12px/1 var(--lab);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+
+.hero{position:relative;min-height:88svh;display:flex;align-items:flex-end;background:var(--ink);color:var(--cream);overflow:hidden;padding-top:88px}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.65) contrast(1.05)}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,#14141455 0%,#14141418 45%,#141414e6 100%)}
+.hero .copy{position:relative;z-index:2;padding:clamp(48px,8vh,92px) 0;width:100%}
+.hero h1{font-size:clamp(42px,6.8vw,90px);line-height:.96}
+.hero h1 span{display:block}
+.hero h1 .red{color:#e06b60}
+.hero .sub{margin-top:16px;font-size:clamp(16px,1.5vw,19.5px);max-width:48ch;color:#f6f3eaeb}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hero .ctas .btn-outline{color:var(--cream);border-color:#f6f3ea88}
+
+#balcony{padding:clamp(72px,9vw,120px) 0}
+.studio-head{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,60px);align-items:end;margin-bottom:28px}
+.studio-head h2{margin-top:12px}
+.ticks{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px}
+.ticks li{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600}
+.ticks svg{width:20px;height:20px;stroke:var(--crimson);fill:none;stroke-width:3;flex:none}
+
+.studio-card{background:var(--cream);color:var(--ink);border-radius:14px;padding:clamp(20px,3vw,34px);border:2px solid var(--sand);display:grid;grid-template-columns:1.25fr .95fr;gap:clamp(22px,3.5vw,40px);align-items:start}
+.canvas-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.canvas-top b{font:700 12px/1 var(--lab);letter-spacing:.18em;text-transform:uppercase}
+.seg-group{display:flex;flex-wrap:wrap;gap:6px}
+.seg-group button{min-height:36px;padding:0 12px;border:2px solid #14141433;background:#fff;border-radius:4px;font:600 11.5px/1 var(--lab);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.seg-group button[aria-pressed="true"]{background:var(--charcoal);color:var(--cream);border-color:var(--charcoal)}
+
+.balcony-viewport{position:relative;width:100%;aspect-ratio:16/10;min-height:280px;background:#dfdbd0;border:2px solid #14141433;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:24px;user-select:none;touch-action:none}
+.balcony-viewport .photo-backdrop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3;pointer-events:none}
+.balcony-deck{position:relative;z-index:2;width:72%;height:72%;min-width:130px;min-height:100px;max-width:100%;max-height:100%;border:3px solid var(--ink);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.balcony-deck .tiles{position:absolute;inset:0;pointer-events:none}
+.balcony-deck .pill-info{position:relative;z-index:2;align-self:flex-start;margin:10px;background:var(--ink);color:var(--cream);padding:5px 10px;border-radius:4px;font:700 12px/1.2 var(--lab);letter-spacing:.12em;text-transform:uppercase;pointer-events:none}
+.balcony-deck .pill-tip{position:relative;z-index:2;align-self:flex-end;margin:0 10px 24px;background:#f6f3eaeb;color:var(--ink);padding:4px 9px;border-radius:4px;font:600 11px/1.2 var(--sans);pointer-events:none}
+
+.drag-knob{position:absolute;z-index:3;background:var(--crimson);border:2px solid var(--cream);color:#fff;font:700 11px/1 var(--lab);display:grid;place-items:center;cursor:grab}
+.drag-knob:active{cursor:grabbing;background:var(--ink)}
+.knob-r{right:0;top:50%;transform:translate(50%,-50%);width:22px;height:42px;border-radius:4px}
+.knob-b{bottom:0;left:50%;transform:translate(-50%,50%);width:42px;height:22px;border-radius:4px}
+.knob-br{right:0;bottom:0;transform:translate(35%,35%);width:28px;height:28px;border-radius:50%}
+
+.dim-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.dim-controls label{display:grid;gap:5px;font:600 11px/1.2 var(--lab);letter-spacing:.16em;text-transform:uppercase}
+.dim-controls .row-in{display:flex;align-items:center;gap:8px}
+.dim-controls input[type="range"]{flex:1;accent-color:var(--crimson);cursor:pointer}
+.dim-controls input[type="number"]{width:74px;min-height:38px;padding:4px 8px;border:2px solid #14141440;border-radius:4px;background:#fff;font:700 15px var(--sans);color:var(--ink)}
+
+.finish-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+.finish-btn{display:flex;align-items:center;gap:10px;padding:9px 11px;border:2px solid #1414142e;background:#fff;border-radius:6px;cursor:pointer;text-align:left;min-height:52px}
+.finish-btn[aria-pressed="true"]{border-color:var(--crimson);background:var(--cream2)}
+.finish-swatch{width:28px;height:28px;border-radius:4px;border:1.5px solid #14141455;flex:none}
+.finish-btn b{display:block;font:700 13px/1.15 var(--lab);text-transform:uppercase}
+.finish-btn small{display:block;font-size:11.5px;color:var(--muted)}
+
+.photo-box{margin-top:12px;padding:12px;border:2px dashed #14141440;border-radius:8px;background:var(--cream2);display:flex;flex-direction:column;gap:8px}
+.photo-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.photo-head b{font:700 12px/1.2 var(--lab);letter-spacing:.14em;text-transform:uppercase}
+.upload-trigger{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border-radius:4px;background:var(--charcoal);color:var(--cream);border:0;font:600 11.5px/1 var(--lab);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.reset-photo{min-height:36px;padding:0 10px;border-radius:4px;background:#fff;color:var(--ink);border:1.5px solid #14141440;font:600 11px/1 var(--lab);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.photo-note{width:100%;min-height:40px;padding:8px 10px;border:1.5px solid #14141438;border-radius:4px;background:#fff;font:400 14px var(--sans);color:var(--ink)}
+.photo-meta{display:flex;align-items:center;gap:10px;font-size:13px}
+.photo-meta img{width:56px;height:42px;object-fit:cover;border-radius:4px;border:1.5px solid var(--ink)}
+.sr-file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+
+.live-box{margin-top:14px;padding:16px;border-radius:8px;background:var(--charcoal);color:var(--cream);border-left:5px solid var(--crimson)}
+.live-box .k{font:600 11px/1 var(--lab);letter-spacing:.2em;text-transform:uppercase;color:var(--sand)}
+.live-box .price{font:700 clamp(28px,3.2vw,38px)/1.05 var(--lab);margin:6px 0 4px}
+.live-box p{font-size:13.5px;color:#e2dcd0;margin-bottom:12px}
+
+#services{padding:clamp(72px,9vw,120px) 0}
+.svc-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:32px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.svc-card{background:var(--cream2);border-radius:10px;overflow:hidden;border:2px solid #1414141f;display:flex;flex-direction:column}
+.svc-card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.svc-card .body{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.svc-card h3{font-size:26px}
+.svc-card p{font-size:15px;color:var(--muted);flex:1}
+.svc-card .q-btn{align-self:flex-start;margin-top:6px;background:none;border:0;border-bottom:3px solid var(--crimson);padding:4px 0;font:700 12px/1 var(--lab);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;min-height:36px}
+
+#work{padding:clamp(72px,9vw,120px) 0;background:var(--cream2)}
+.work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+.work-card{background:var(--cream);border-radius:10px;overflow:hidden;border:2px solid #1414141f}
+.work-card img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.work-card figcaption{padding:12px 14px}
+.work-card b{display:block;font:700 15px/1.2 var(--lab);text-transform:uppercase}
+.work-card span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+#reviews{padding:clamp(72px,9vw,120px) 0}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.rev-card{background:var(--cream2);border-radius:10px;padding:22px;border:2px solid #1414141f;display:flex;flex-direction:column;gap:12px}
+.rev-card blockquote{font-size:15.5px;line-height:1.48;flex:1}
+.rev-card b{display:block;font:700 13px/1.2 var(--lab);letter-spacing:.14em;text-transform:uppercase}
+.rev-card span{font-size:12.5px;color:var(--muted)}
+
+#quote{padding:clamp(72px,9vw,120px) 0;background:var(--cream2)}
+#quote .g{display:grid;grid-template-columns:.88fr 1.12fr;gap:clamp(24px,4vw,64px);align-items:start}
+.q-left{background:var(--charcoal);color:var(--cream);border-radius:12px;padding:clamp(22px,3vw,36px);border-top:6px solid var(--crimson)}
+.q-left h2{color:var(--cream);margin-top:12px}
+.q-left .lead{color:#e2dcd0;margin-top:12px}
+.direct-list{display:grid;gap:10px;margin-top:20px}
+.direct-list a{background:var(--cream);color:var(--ink);border-radius:6px;padding:12px 14px;display:block}
+.direct-list a:hover{background:var(--sand)}
+.direct-list b{display:block;font:700 18px/1.1 var(--lab);text-transform:uppercase}
+.direct-list span{font-size:13px;color:var(--muted)}
+
+.qb{background:var(--cream);border-radius:12px;padding:clamp(20px,3vw,34px);border:2px solid var(--sand)}
+.qb fieldset{border:0;margin-bottom:18px}
+.qb legend{font:700 18px/1.1 var(--lab);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-height:42px;padding:0 14px;border:2px solid #14141438;background:#fff;border-radius:4px;font:500 14px var(--sans);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--crimson);color:#fff;border-color:var(--crimson)}
+.qb .f{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qb input,.qb textarea{width:100%;min-height:48px;border:2px solid #14141438;border-radius:4px;background:#fff;padding:10px 14px;font:400 15.5px var(--sans);color:var(--ink)}
+.qb textarea{min-height:105px;resize:vertical;grid-column:1/-1}
+.qb .full{grid-column:1/-1}
+.qb .ok{display:none;background:var(--charcoal);color:var(--cream);padding:14px;border-radius:6px;margin-top:12px;font-size:14.5px}
+
+/* Footer with solid crimson top bar on rectangle + Powered by Chairlift bottom right */
+footer{background:var(--charcoal);color:var(--cream);padding:clamp(44px,6vw,72px) 0}
+.ft-box{background:#1D2023;padding:clamp(28px,4vw,44px);border:2px solid #3A3F45;border-top:10px solid var(--crimson)}
+footer .g{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr;gap:28px;align-items:start}
+footer h4{font:700 12px/1 var(--lab);letter-spacing:.2em;text-transform:uppercase;color:var(--sand);margin-bottom:12px}
+footer a,footer li{display:block;font-size:14.5px;line-height:1.9}
+footer ul{list-style:none}
+.ft-fine{margin-top:32px;padding-top:18px;border-top:2px solid #f6f3ea22;font-size:13px;color:var(--sand);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.chairlift-credit{display:inline-flex;align-items:center;gap:10px;font:600 12px/1 var(--sans);color:var(--sand)}
+.cl-badge{display:inline-flex;align-items:center;gap:8px;background:#131A26;color:#FFFFFF;padding:6px 12px 6px 8px;border-radius:6px;border:1px solid #2A3548}
+.cl-badge b{font:700 14px/1 var(--sans);letter-spacing:-.01em;color:#FFFFFF}
+
+@media(max-width:980px){
+  .nav{display:none}.mbtn{display:inline-flex}
+  .studio-head,.studio-card,.svc-grid,.rev-grid,#quote .g,footer .g{grid-template-columns:1fr}
+  .work-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .stamp-hd{width:50px;height:50px}.steady-row{font-size:30px}.imp-row{font-size:10px;letter-spacing:.26em}.brand-lockup{gap:12px}
+  .dim-controls,.finish-grid,.qb .f,.work-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="hd">
+  <div class="wrap">
+    <a href="#top" class="brand-lockup" aria-label="Steady Improvements home">
+      <span class="stamp-ring stamp-hd"><img src="https://lh3.googleusercontent.com/d/1A0wS6qNrUDD43hVQ-0Xk7tgAISFZpXfb" onerror="this.onerror=null;this.src='https://drive.google.com/uc?export=view&id=1A0wS6qNrUDD43hVQ-0Xk7tgAISFZpXfb'" alt="Steady Improvements circular badge"></span>
+      <span class="wordmark">
+        <span class="steady-row">S<svg class="hammer-t" viewBox="0 0 36 44" aria-label="T" role="img"><path d="M5 6c6-2 14-2 21 0 4 1.2 7 3.8 8.5 7.2l-3.4 1.5c-1.8-2.2-4.2-3.4-7.1-3.7h-2.5v29.5c0 1.4-1.1 2.5-2.5 2.5h-2c-1.4 0-2.5-1.1-2.5-2.5V11H9v2H4.5V5.5L5 6z" fill="currentColor"/></svg>EADY</span>
+        <span class="imp-row">IMPROVEMENTS</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a class="l" href="#balcony">Balcony Studio</a>
+      <a class="l" href="#services">Services</a>
+      <a class="l" href="#work">Work</a>
+      <a class="l" href="#reviews">Reviews</a>
+      <a class="btn btn-crimson" href="#quote">Get a quote</a>
+    </nav>
+    <button class="mbtn" id="mbtn" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <span aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" hidden>
+  <button class="mx" id="mx">Close</button>
+  <a href="#top">Home</a>
+  <a href="#balcony">Balcony Studio</a>
+  <a href="#services">Services</a>
+  <a href="#work">Our Work</a>
+  <a href="#reviews">Reviews</a>
+  <a href="#quote">Get a Quote</a>
+</div>
+
+<main id="top">
+  <section class="hero">
+    <img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/ig/c-td.jpg" alt="Architectural wall tile installation">
+    <div class="shade"></div>
+    <div class="wrap copy">
+      <h1><span>Built in</span><span class="red">charcoal &amp;</span><span>crimson.</span></h1>
+      <p class="sub">Steady Improvements—interior finishes, composite balcony flooring, and commercial fit-outs matched to your existing company stamp.</p>
+      <div class="ctas">
+        <a class="btn btn-crimson" href="#balcony">Launch balcony studio</a>
+        <a class="btn btn-outline" href="#quote">Get a quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="on-charcoal" id="balcony">
+    <div class="wrap">
+      <div class="studio-head rv">
+        <div>
+          <p class="eyebrow">Balcony Flooring Studio</p>
+          <h2>Stretch your size &amp; build a live quote.</h2>
+          <p class="lead">Drag the handles or set dimensions to preview composite balcony flooring across your space and generate a live quote.</p>
+        </div>
+        <ul class="ticks">
+          <li><svg viewBox="0 0 26 26"><path d="M4 13l6 6L22 6"/></svg>Condo board approved</li>
+          <li><svg viewBox="0 0 26 26"><path d="M4 13l6 6L22 6"/></svg>Low maintenance outdoor finish</li>
+          <li><svg viewBox="0 0 26 26"><path d="M4 13l6 6L22 6"/></svg>Installed by our crew</li>
+        </ul>
+      </div>
+
+      <div class="studio-card rv">
+        <div>
+          <div class="canvas-top">
+            <b>Interactive balcony stretch floor</b>
+            <div class="seg-group" role="group" aria-label="Floor pattern">
+              <button type="button" data-pat="grid" aria-pressed="true">Grid</button>
+              <button type="button" data-pat="stagger" aria-pressed="false">Staggered</button>
+              <button type="button" data-pat="diagonal" aria-pressed="false">Diagonal</button>
+            </div>
+          </div>
+
+          <div class="balcony-viewport" id="bViewport">
+            <img class="photo-backdrop" id="bPhotoBackdrop" src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/balcony-teak.jpg" alt="Balcony space backdrop">
+            <div class="balcony-deck" id="bDeck">
+              <div class="tiles" id="bTiles"></div>
+              <span class="pill-info" id="bBadge">18 ft × 6 ft · 108 sq ft</span>
+              <span class="pill-tip">Drag handles to stretch</span>
+              <button type="button" class="drag-knob knob-r" id="knobR" aria-label="Stretch length">&#8596;</button>
+              <button type="button" class="drag-knob knob-b" id="knobB" aria-label="Stretch depth">&#8597;</button>
+              <button type="button" class="drag-knob knob-br" id="knobBR" aria-label="Stretch length and depth">&#8689;</button>
+            </div>
+          </div>
+
+          <div class="dim-controls">
+            <label>
+              Length (ft)
+              <span class="row-in">
+                <input type="range" id="rLen" min="4" max="45" step="0.5" value="18">
+                <input type="number" id="nLen" min="2" max="80" step="0.5" value="18">
+              </span>
+            </label>
+            <label>
+              Depth (ft)
+              <span class="row-in">
+                <input type="range" id="rWid" min="3" max="20" step="0.5" value="6">
+                <input type="number" id="nWid" min="2" max="40" step="0.5" value="6">
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <b style="font:700 12px/1 var(--lab);letter-spacing:.18em;text-transform:uppercase;display:block">Select flooring finish</b>
+          <div class="finish-grid" role="group" aria-label="Composite finishes">
+            <button type="button" class="finish-btn" data-finish="Warm Teak Composite" data-rate="18" data-color="#B98A50" data-line="#4A351E" aria-pressed="true">
+              <span class="finish-swatch" style="background:#B98A50"></span>
+              <span><b>Warm Teak</b><small>Composite deck finish</small></span>
+            </button>
+            <button type="button" class="finish-btn" data-finish="Cool Grey Composite" data-rate="18" data-color="#7D858C" data-line="#2D3236" aria-pressed="false">
+              <span class="finish-swatch" style="background:#7D858C"></span>
+              <span><b>Cool Grey</b><small>Clean modern grey</small></span>
+            </button>
+            <button type="button" class="finish-btn" data-finish="Charcoal Slate Tile" data-rate="20" data-color="#3B4148" data-line="#181B1E" aria-pressed="false">
+              <span class="finish-swatch" style="background:#3B4148"></span>
+              <span><b>Charcoal Slate</b><small>Rich dark slate tone</small></span>
+            </button>
+            <button type="button" class="finish-btn" data-finish="Natural Cedar Tone" data-rate="19" data-color="#C88A56" data-line="#5C3B1E" aria-pressed="false">
+              <span class="finish-swatch" style="background:#C88A56"></span>
+              <span><b>Natural Cedar</b><small>Warm wood grain look</small></span>
+            </button>
+          </div>
+
+          <div class="photo-box">
+            <div class="photo-head">
+              <b>Balcony photo for your quote</b>
+              <div>
+                <button type="button" class="upload-trigger" id="bUploadBtn">Upload photo</button>
+                <input type="file" id="bPhotoFile" class="sr-file" accept="image/*">
+                <button type="button" class="reset-photo" id="bPhotoReset" hidden>Clear</button>
+              </div>
+            </div>
+            <div class="photo-meta" id="bPhotoMeta" hidden>
+              <div id="bPhotoThumbWrap"></div>
+              <span id="bPhotoName"></span>
+            </div>
+            <input type="text" class="photo-note" id="bPhotoNote" placeholder="Notes from your photo (door clearance, drain location, railing type)">
+          </div>
+
+          <div class="live-box">
+            <span class="k">Live quote summary</span>
+            <div class="price" id="bEstPrice">$1,944 – $2,376 CAD</div>
+            <p id="bEstDetail">108 sq ft · Warm Teak Composite · Grid layout · Supply &amp; installation</p>
+            <button type="button" class="btn btn-cream" id="bApplyQuote" style="width:100%">Use in quote form</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="svc-head rv">
+        <div><p class="eyebrow">Services</p><h2 style="margin-top:12px">Interior finishes &amp; fit-outs.</h2></div>
+        <p class="lead">Tap any service to start a quote.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="svc-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/bathroom.jpg" alt="Finished bathroom" loading="lazy"><div class="body"><h3>Bathrooms</h3><p>Materials, structural prep, fixture coordination, and clean finishing.</p><button type="button" class="q-btn" data-svc="Bathroom">Quote bathroom</button></div></article>
+        <article class="svc-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/kitchen.jpg" alt="Renovated kitchen" loading="lazy"><div class="body"><h3>Kitchens</h3><p>Cabinetry, islands, appliances, and finishes completed on schedule.</p><button type="button" class="q-btn" data-svc="Kitchen">Quote kitchen</button></div></article>
+        <article class="svc-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/balcony-teak.jpg" alt="Composite balcony flooring" loading="lazy"><div class="body"><h3>Flooring</h3><p>Composite balcony tiles plus hardwood, laminate, vinyl, and ceramic tile.</p><button type="button" class="q-btn" data-svc="Flooring">Quote flooring</button></div></article>
+        <article class="svc-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/blind.jpg" alt="Window shades installed" loading="lazy"><div class="body"><h3>Window coverings</h3><p>Blinds, shades, and shutters matched to the room and installed cleanly.</p><button type="button" class="q-btn" data-svc="Window coverings">Quote coverings</button></div></article>
+        <article class="svc-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/framing.jpg" alt="Interior demolition and framing" loading="lazy"><div class="body"><h3>Demolition</h3><p>Planned strip-outs for residential and commercial spaces that keep timelines moving.</p><button type="button" class="q-btn" data-svc="Demolition">Quote demolition</button></div></article>
+        <article class="svc-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/ig/cr-3.jpg" alt="Commercial wall prep and restoration" loading="lazy"><div class="body"><h3>Repairs &amp; restorations</h3><p>Targeted repairs, trim, drywall, and commercial refresh work on live or occupied sites.</p><button type="button" class="q-btn" data-svc="Repairs and restorations">Quote repair</button></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="rv"><p class="eyebrow">Selected projects</p><h2 style="margin-top:12px">Commercial &amp; residential work.</h2></div>
+      <div class="work-grid">
+        <figure class="work-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/ig/c-aera.jpg" alt="Arched millwork at Aera" loading="lazy"><figcaption><b>Aera Restaurant</b><span>Architectural Millwork</span></figcaption></figure>
+        <figure class="work-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/ig/fifa-3.jpg" alt="Custom counters at BMO Field" loading="lazy"><figcaption><b>BMO Field</b><span>Event &amp; Media Build</span></figcaption></figure>
+        <figure class="work-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/ig/c-td.jpg" alt="Acoustic wall panels at TD Tower" loading="lazy"><figcaption><b>TD Tower</b><span>Acoustic Wall Panels</span></figcaption></figure>
+        <figure class="work-card rv"><img src="https://ryan-peddigrew.github.io/sites/steady-improvements/img/ig/c-winners.jpg" alt="Retail fixture installation" loading="lazy"><figcaption><b>Winners</b><span>Store Fixtures &amp; Rooms</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="wrap">
+      <div class="rv"><p class="eyebrow">Client feedback</p><h2 style="margin-top:12px">Trusted across Toronto &amp; the GTA.</h2></div>
+      <div class="rev-grid">
+        <article class="rev-card rv"><blockquote>&ldquo;We&rsquo;re very impressed with the work that Everton did for us. I would not hesitate to recommend him for similar projects.&rdquo;</blockquote><div><b>Lynn · Toronto</b><span>Trim &amp; decorative mouldings</span></div></article>
+        <article class="rev-card rv"><blockquote>&ldquo;Everton was punctual. Tidy, friendly and efficient. Will be my new go to for any work!&rdquo;</blockquote><div><b>HomeStars Client · Toronto</b><span>Trim &amp; decorative mouldings</span></div></article>
+        <article class="rev-card rv"><blockquote>&ldquo;Great working with Everton! We were able to create a custom desk and shelf unit that fit our space and needs.&rdquo;</blockquote><div><b>Sophie · Toronto</b><span>Custom desk &amp; shelving</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="quote">
+    <div class="wrap g">
+      <div class="q-left rv">
+        <p class="eyebrow">Request a quote</p>
+        <h2>Tell us about the job.</h2>
+        <p class="lead">Your balcony dimensions and finish details carry straight into this form.</p>
+        <div class="direct-list">
+          <a href="tel:+16474586365"><b>(647) 458-6365</b><span>Monday–Friday, 9 a.m. to 5 p.m.</span></a>
+          <a href="sms:+16474586365"><b>Text us photos</b><span>Send snapshots of your balcony or room</span></a>
+          <a href="mailto:Steadyimprovements@gmail.com"><b>Steadyimprovements@gmail.com</b><span>Email project details</span></a>
+        </div>
+      </div>
+
+      <form class="qb rv" id="qForm" novalidate>
+        <fieldset><legend>Scope</legend>
+          <div class="chips" data-k="Job" data-multi="1">
+            <button type="button">Balcony flooring</button><button type="button">Flooring</button><button type="button">Bathroom</button><button type="button">Kitchen</button><button type="button">Window coverings</button><button type="button">Demolition</button><button type="button">Commercial fit-out</button><button type="button">Repairs and restorations</button>
+          </div>
+        </fieldset>
+        <fieldset><legend>Property type</legend>
+          <div class="chips" data-k="Property"><button type="button">Condo</button><button type="button">House</button><button type="button">Business</button></div>
+        </fieldset>
+        <fieldset><legend>Contact details</legend>
+          <div class="f">
+            <input name="name" placeholder="Your name" aria-label="Your name">
+            <input name="phone" type="tel" placeholder="Phone number" aria-label="Phone number">
+            <input class="full" name="email" type="email" placeholder="Email address" aria-label="Email address">
+            <textarea name="details" id="qDetails" placeholder="Project details..." aria-label="Project details"></textarea>
+          </div>
+        </fieldset>
+        <button type="submit" class="btn btn-crimson" style="width:100%">Send quote request</button>
+        <p class="ok" id="qOk">Your mail app has opened with your quote request.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap ft-box">
+    <div class="g">
+      <div>
+        <a href="#top" class="brand-lockup">
+          <span class="stamp-ring stamp-ft"><img src="https://lh3.googleusercontent.com/d/1A0wS6qNrUDD43hVQ-0Xk7tgAISFZpXfb" onerror="this.onerror=null;this.src='https://drive.google.com/uc?export=view&id=1A0wS6qNrUDD43hVQ-0Xk7tgAISFZpXfb'" alt="Steady Improvements"></span>
+        </a>
+        <p style="font-size:14.5px;margin-top:12px;color:var(--sand)">Carpentry you can count on.</p>
+      </div>
+      <div><h4>Contact</h4><a href="tel:+16474586365">(647) 458-6365</a><a href="mailto:Steadyimprovements@gmail.com">Steadyimprovements@gmail.com</a><a href="https://www.instagram.com/steady_improvements/" target="_blank" rel="noopener">@steady_improvements</a></div>
+      <div><h4>Hours</h4><ul><li>Monday – Friday</li><li>9 a.m. to 5 p.m.</li><li>Weekends closed</li></ul></div>
+      <div><h4>Services</h4><ul><li>Balcony &amp; interior flooring</li><li>Bathrooms &amp; kitchens</li><li>Window coverings</li><li>Demolition &amp; repairs</li></ul></div>
+    </div>
+    <div class="ft-fine">
+      <span>&copy; <span id="yr">2026</span> Steady Improvements. All rights reserved.</span>
+      <a class="chairlift-credit" href="https://usechairlift.com" target="_blank" rel="noopener" aria-label="Powered by Chairlift">
+        <span>Powered by</span>
+        <span class="cl-badge">
+          <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+            <rect x="1.5" y="1.5" width="29" height="29" rx="3" fill="#131A26" stroke="#3B4559" stroke-width="1.5"/>
+            <rect x="5" y="21" width="9" height="3.2" rx="1.2" fill="#FFFFFF"/>
+            <rect x="11.5" y="14.4" width="9" height="3.2" rx="1.2" fill="#FFFFFF"/>
+            <rect x="18" y="7.8" width="9" height="3.2" rx="1.2" fill="#34F5B8"/>
+          </svg>
+          <b>Chairlift</b>
+        </span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const IMG_BASE='https://ryan-peddigrew.github.io/sites/steady-improvements/img/';
+$('#yr').textContent=new Date().getFullYear();
+
+const mbtn=$('#mbtn'),mnav=$('#mnav'),mx=$('#mx');
+const setNav=o=>{mnav.hidden=!o;mbtn.setAttribute('aria-expanded',o)};
+mbtn.onclick=()=>setNav(true);mx.onclick=()=>setNav(false);
+mnav.querySelectorAll('a').forEach(a=>a.onclick=()=>setNav(false));
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+$$('.rv').forEach(el=>io.observe(el));
+
+(()=>{
+  const deck=$('#bDeck'),vp=$('#bViewport'),tiles=$('#bTiles');
+  const rLen=$('#rLen'),nLen=$('#nLen'),rWid=$('#rWid'),nWid=$('#nWid');
+  const badge=$('#bBadge'),priceEl=$('#bEstPrice'),detailEl=$('#bEstDetail');
+  const uploadBtn=$('#bUploadBtn'),fileIn=$('#bPhotoFile'),resetBtn=$('#bPhotoReset');
+  const metaBox=$('#bPhotoMeta'),thumbWrap=$('#bPhotoThumbWrap'),fname=$('#bPhotoName');
+  const backdrop=$('#bPhotoBackdrop'),noteIn=$('#bPhotoNote');
+  let st={len:18,wid:6,finish:'Warm Teak Composite',rate:18,color:'#B98A50',line:'#4A351E',pat:'grid',hasPhoto:false,photoName:''};
+
+  function defaultBackdrop(){
+    return IMG_BASE+((st.finish.includes('Grey')||st.finish.includes('Slate'))?'balcony-grey.jpg':'balcony-teak.jpg');
+  }
+
+  function renderTiles(){
+    if(st.pat==='grid'){
+      tiles.style.background=`repeating-linear-gradient(0deg,${st.line} 0 2px,${st.color} 2px 34px),repeating-linear-gradient(90deg,${st.line} 0 2px,${st.color} 2px 34px),${st.color}`;
+      tiles.style.backgroundSize='34px 34px';
+    }else if(st.pat==='stagger'){
+      tiles.style.background=`repeating-linear-gradient(0deg,${st.line} 0 2px,transparent 2px 26px),repeating-linear-gradient(90deg,${st.line} 0 2px,transparent 2px 52px),${st.color}`;
+      tiles.style.backgroundSize='52px 26px';
+    }else{
+      tiles.style.background=`repeating-linear-gradient(45deg,${st.line} 0 2px,${st.color} 2px 28px),repeating-linear-gradient(-45deg,${st.line} 0 2px,transparent 2px 28px),${st.color}`;
+      tiles.style.backgroundSize='28px 28px';
+    }
+  }
+
+  function updateStudio(fromDrag=false){
+    st.len=Math.max(2,Math.min(80,parseFloat(st.len)||2));
+    st.wid=Math.max(2,Math.min(40,parseFloat(st.wid)||2));
+    if(!fromDrag){
+      nLen.value=st.len;nWid.value=st.wid;rLen.value=Math.min(45,Math.max(4,st.len));rWid.value=Math.min(20,Math.max(3,st.wid));
+      deck.style.width=Math.min(94,Math.max(28,(st.len/45)*94))+'%';
+      deck.style.height=Math.min(90,Math.max(34,(st.wid/20)*90))+'%';
+    }
+    const sqft=Math.round(st.len*st.wid*10)/10;
+    const lo=Math.round(sqft*st.rate),hi=Math.round(sqft*(st.rate+4));
+    badge.textContent=`${st.len} ft × ${st.wid} ft · ${sqft} sq ft`;
+    priceEl.textContent=`$${lo.toLocaleString()} – $${hi.toLocaleString()} CAD`;
+    detailEl.textContent=`${sqft} sq ft · ${st.finish} · ${st.pat} layout${st.hasPhoto?' · Photo added':''}`;
+    renderTiles();
+  }
+
+  rLen.oninput=()=>{st.len=parseFloat(rLen.value);updateStudio(false)};
+  nLen.oninput=()=>{st.len=parseFloat(nLen.value);updateStudio(false)};
+  rWid.oninput=()=>{st.wid=parseFloat(rWid.value);updateStudio(false)};
+  nWid.oninput=()=>{st.wid=parseFloat(nWid.value);updateStudio(false)};
+
+  $$('.finish-btn').forEach(b=>b.onclick=()=>{
+    $$('.finish-btn').forEach(x=>x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    st.finish=b.dataset.finish;st.rate=parseFloat(b.dataset.rate)||18;
+    st.color=b.dataset.color;st.line=b.dataset.line;
+    if(!st.hasPhoto)backdrop.src=defaultBackdrop();
+    updateStudio(false);
+  });
+
+  $$('.seg-group button').forEach(b=>b.onclick=()=>{
+    $$('.seg-group button').forEach(x=>x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    st.pat=b.dataset.pat;updateStudio(false);
+  });
+
+  let drag=null,sx=0,sy=0,sw=0,sh=0;
+  function move(e){
+    if(!drag)return;const pt=e.touches?e.touches[0]:e;const vr=vp.getBoundingClientRect();
+    let nw=sw,nh=sh;
+    if(drag==='r'||drag==='br')nw=Math.max(130,Math.min(vr.width-48,sw+(pt.clientX-sx)));
+    if(drag==='b'||drag==='br')nh=Math.max(100,Math.min(vr.height-48,sh+(pt.clientY-sy)));
+    deck.style.width=nw+'px';deck.style.height=nh+'px';
+    const pw=(nw-130)/Math.max(1,(vr.width-48-130));
+    const ph=(nh-100)/Math.max(1,(vr.height-48-100));
+    st.len=Math.round((4+Math.max(0,Math.min(1,pw))*41)*2)/2;
+    st.wid=Math.round((3+Math.max(0,Math.min(1,ph))*17)*2)/2;
+    nLen.value=st.len;nWid.value=st.wid;rLen.value=st.len;rWid.value=st.wid;
+    updateStudio(true);
+  }
+  function stop(){drag=null;removeEventListener('pointermove',move);removeEventListener('pointerup',stop)}
+  [['knobR','r'],['knobB','b'],['knobBR','br']].forEach(([id,m])=>{
+    $('#'+id).addEventListener('pointerdown',e=>{
+      e.preventDefault();drag=m;const r=deck.getBoundingClientRect();
+      sx=e.clientX;sy=e.clientY;sw=r.width;sh=r.height;
+      addEventListener('pointermove',move);addEventListener('pointerup',stop);
+    });
+  });
+
+  uploadBtn.onclick=()=>fileIn.click();
+  fileIn.onchange=()=>{
+    const f=fileIn.files&&fileIn.files[0];if(!f)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const dataUrl=ev.target.result;
+      backdrop.src=dataUrl;
+      thumbWrap.innerHTML='';
+      const img=document.createElement('img');
+      img.src=dataUrl;img.alt='Uploaded balcony preview';
+      thumbWrap.appendChild(img);
+      fname.textContent=f.name;
+      metaBox.hidden=false;resetBtn.hidden=false;st.hasPhoto=true;st.photoName=f.name;
+      updateStudio(true);
+    };
+    reader.readAsDataURL(f);
+  };
+  resetBtn.onclick=()=>{
+    fileIn.value='';thumbWrap.innerHTML='';metaBox.hidden=true;resetBtn.hidden=true;
+    st.hasPhoto=false;st.photoName='';backdrop.src=defaultBackdrop();
+    updateStudio(false);
+  };
+
+  $('#bApplyQuote').onclick=()=>{
+    const sqft=Math.round(st.len*st.wid*10)/10;
+    const lo=Math.round(sqft*st.rate),hi=Math.round(sqft*(st.rate+4));
+    pick('Job','Balcony flooring');pick('Property','Condo');
+    const summary=`Balcony studio: ${st.len} ft x ${st.wid} ft (${sqft} sq ft), ${st.finish}, ${st.pat}, est. $${lo.toLocaleString()}–$${hi.toLocaleString()} CAD${st.hasPhoto?` [Photo: ${st.photoName}]`:''}${noteIn.value.trim()?` — ${noteIn.value.trim()}`:''}`;
+    const d=$('#qDetails');d.value=summary+(d.value?'\n'+d.value:'');
+    $('#quote').scrollIntoView({behavior:'smooth'});
+  };
+  updateStudio(false);
+})();
+
+const pick=(k,label)=>{const g=$(`.chips[data-k="${k}"]`);if(!g)return;[...g.children].forEach(b=>{if(b.textContent===label)b.setAttribute('aria-pressed','true');else if(!g.dataset.multi)b.setAttribute('aria-pressed','false')})};
+$$('.chips button').forEach(b=>{b.setAttribute('aria-pressed','false');b.onclick=()=>{const g=b.parentElement,on=b.getAttribute('aria-pressed')!=='true';if(!g.dataset.multi)[...g.children].forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed',on?'true':'false')}});
+$$('.q-btn').forEach(b=>b.onclick=()=>{pick('Job',b.dataset.svc);$('#quote').scrollIntoView({behavior:'smooth'})});
+$('#qForm').onsubmit=e=>{
+  e.preventDefault();const f=e.target;
+  const sel=k=>[...$(`.chips[data-k="${k}"]`).children].filter(b=>b.getAttribute('aria-pressed')==='true').map(b=>b.textContent).join(', ')||'Not specified';
+  const body=`Job: ${sel('Job')}\nPlace: ${sel('Property')}\n\nName: ${f.name.value}\nPhone: ${f.phone.value}\nEmail: ${f.email.value}\n\n${f.details.value}`;
+  location.href=`mailto:Steadyimprovements@gmail.com?subject=${encodeURIComponent('Quote request: '+sel('Job'))}&body=${encodeURIComponent(body)}`;
+  $('#qOk').style.display='block';
+};
+</script>
+</body>
+</html>
